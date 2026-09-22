@@ -21,7 +21,7 @@ length(samp)
 
 # Section 2
 
-I can take the mean of the sample, too! The mean is -0.0532862.
+I can take the mean of the sample, too! The mean is 0.1449574.
 
 # Section 3: a tibble
 
@@ -35,14 +35,14 @@ head(plot_df)
 ```
 
     ## # A tibble: 6 × 2
-    ##         x     y
-    ##     <dbl> <dbl>
-    ## 1 -0.225  2.57 
-    ## 2  0.733  0.787
-    ## 3 -0.0335 0.742
-    ## 4  0.147  1.49 
-    ## 5  0.0551 2.20 
-    ## 6  0.390  3.49
+    ##        x      y
+    ##    <dbl>  <dbl>
+    ## 1 -0.516 -0.802
+    ## 2  0.427  1.85 
+    ## 3 -0.520 -1.75 
+    ## 4  0.597  1.60 
+    ## 5  0.547  1.58 
+    ## 6 -0.717  1.05
 
 # Section 4: plots
 
@@ -50,7 +50,7 @@ These are plots from are random sample.
 
     ## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 
-![](template_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->![](template_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
+![](buliding_blocks_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->![](buliding_blocks_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
 # Section 5: Learning Assessment 2
 
@@ -80,7 +80,7 @@ ggplot(assessment_df, aes(x = abs_var)) +
 
     ## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 
-![](template_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](buliding_blocks_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
 median_sample = median(assessment_df$num_var) # my solution (don't use this because using the $ there is a possibility that it goes back and edit the df so it's better to just use the function pull)
