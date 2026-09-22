@@ -96,4 +96,11 @@ pulse_df = janitor::clean_names(pulse_df)
 ```
 
 
+## What's so bad about `read.csv()`
+```{r}
+pups_df_base = read.csv("data/FAS_pups.csv")
+pups_df_base
+```
 
+attempts to show as many rows as impossible unlike with read_csv()
+Wont' show: lazy about variables names; super slow for big datasets.
