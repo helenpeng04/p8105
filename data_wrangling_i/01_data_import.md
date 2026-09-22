@@ -21,10 +21,16 @@ library(tidyverse)
     ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
 ``` r
-library(readxl)
+library(readxl) # for excel import
 ```
 
     ## Warning: package 'readxl' was built under R version 4.4.3
+
+``` r
+library(haven) # for SAS import
+```
+
+    ## Warning: package 'haven' was built under R version 4.4.3
 
 ## Import two datasets
 
@@ -202,4 +208,16 @@ What about Two Towers?
 ``` r
 tt_df = 
   read_excel("data/LotR_Words.xlsx", range = "F3:H6")
+
+# never commit the ~$ files it's there when the excel or word tab is open it's a temp file that is useless
+```
+
+## Import SAS
+
+Read in the PULSE dataset
+
+``` r
+pulse_df = read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df = janitor::clean_names(pulse_df)
 ```
