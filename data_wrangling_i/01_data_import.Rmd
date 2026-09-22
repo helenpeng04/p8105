@@ -15,7 +15,11 @@ Import our first dataset
 
 ```{r}
 litters_df = 
-  read.csv(file = "data/FAS_litters.csv")
+  read_csv(file = "data/FAS_litters.csv",  
+           na = c(".", "NA","")
+           )
+
+# read_csv is tidyverse updated and better while read.csv is base R
 
 litters_df = janitor::clean_names(litters_df)
 ```
@@ -23,8 +27,10 @@ litters_df = janitor::clean_names(litters_df)
 Import our second dataset
 ```{r}
 pups_df =
-  read.csv(file = "data/FAS_pups.csv", skip = 3) # skip 3 rows because the csv has the data codebook on the first few rows
-
+  read_csv(file = "data/FAS_pups.csv", 
+           skip = 3, # skip 3 rows because the csv has the data codebook on the first few rows
+           na = c(".", "NA","") # character vector of strings to interpret as missing values
+           ) 
 pups_df = janitor::clean_names(pups_df)
 ```
 
@@ -43,6 +49,9 @@ tail(pups_df, 5)
 Skimming??
 
 ```{r}
-skimr::skim(pups_df) # prints an extended summary of what's going on
+skimr::skim(pups_df) # prints an extended summary of what's going on (new function!!)
 ```
+
+## Oh excel ...
+
 
