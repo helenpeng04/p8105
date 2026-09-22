@@ -8,6 +8,7 @@ This file is for doing data import.
 
 ```{r}
 library(tidyverse)
+library(readxl)
 ```
 
 ## Import two datasets
@@ -54,4 +55,32 @@ skimr::skim(pups_df) # prints an extended summary of what's going on (new functi
 
 ## Oh excel ...
 
+Jenny Bryan made `readxl` to solve our problems. 
+
+```{r}
+mlb_df = 
+  read_excel("data/mlb11.xlsx")
+```
+
+Look at the data!
+
+```{r}
+head(mlb_df)
+```
+
+Load some LotR data
+
+Import FOTR words.
+```{r}
+fotr_df = 
+  read_excel("data/LotR_Words.xlsx", range = "B3:D6")
+```
+
+What about Two Towers?
+```{r}
+tt_df = 
+  read_excel("data/LotR_Words.xlsx", range = "F3:H6")
+
+# never commit the ~$ files it's there when the excel or word tab is open it's a temp file 
+```
 
