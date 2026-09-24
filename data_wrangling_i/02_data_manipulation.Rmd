@@ -3,7 +3,7 @@ title: "02_data_manipulation"
 output: github_document
 ---
 
-This file is for doing data manipulation
+This file is for doing data manipulation.
 
 ```{r}
 library(tidyverse)
@@ -106,5 +106,77 @@ mutate(pups_df,
 arrange(litters_df, pups_born_alive)
 
 arrange(litters_df, desc(pups_born_alive))
+```
+
+## Do multiple steps...
+
+```{r}
+# this is bad
+litters_df = read_csv(file = "data/FAS_litters.csv", na = c("","NA","."))
+litters_rename_df = janitor::clean_names(litters_df)
+litters_with_gd_df = select(litters_rename_df, group, starts_with("gd"))
+litters_no_na_df = drop_na(litters_with_gd_df)
+litters_wt_gain_df = mutate(litters_no_na_df, wt_gain = gd18_weight - gd0_weight)
+
+## this is even worse
+select(janitor::clean_names(read_csv(file = "data/FAS_litters.csv", na = c("","NA","."))), group, starts_with("gd"))
+
+## this is good!!
+litters_df = 
+  read_csv(file = "data/FAS_litters.csv", na = c("","NA",".")) |> 
+  janitor::clean_names() |> 
+  select(group, starts_with("gd")) |> 
+  drop_na() |> 
+  mutate(
+    wt_gain =  gd18_weight - gd0_weight,
+    group = str_to_lower(group)
+  )
+
+```
+
+Load pups, clean names, drop missing, keep litter number and pd variables, and add pd walk minus 7.
+```{r}
+pups_df = 
+  read_csv(file = "data/FAS_pups.csv", na = c("","NA","."), skip = 3) |> 
+  janitor::clean_names() |> 
+  drop_na() |> 
+  select(litter_number, starts_with("pd")) |> 
+  mutate(
+    pd_walk_minus_7 = pd_walk - 7
+  )
+```
+
+sometime the first thing isn't a dataframe
+
+```{r}
+litters_df |> 
+  filter(group %in% c("con7", "con8")) |> 
+  lm(gd18_weight ~ gd0_weight, data = _)
+```
+
+`select` vs. `pull`
+```{r}
+litters_df |> 
+  select(group) 
+
+litters_df |> 
+  pull(group)
+
+# select always give a df but pull gives a vector
+# if you have a df you should never take something out of the dataframe so dont use pull
+
+litters_df$group # don't do this, never do this
+
+# difference between pull and $ functionally not much, subtle differences not important. But it is better to use pull because it's clear you are taking something out of a dataframe. 
+
+```
+
+pipes and view
+```{r}
+# litters_df |> 
+#   filter(group %in% c("con7", "con8")) |> 
+#   view()
+
+# you can view dataset but remember remove it or just do it in the console
 ```
 
