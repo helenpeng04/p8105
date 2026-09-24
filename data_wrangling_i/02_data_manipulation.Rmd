@@ -1,0 +1,61 @@
+---
+title: "02_data_manipulation"
+output: github_document
+---
+
+This file is for doing data manipulation
+
+```{r}
+library(tidyverse)
+```
+
+Load the litters and pups datasets.
+
+```{r}
+litters_df = 
+  read_csv(file = "data/FAS_litters.csv",
+           na = c("","NA","."))
+
+litters_df = janitor::clean_names(litters_df)
+
+pups_df = 
+  read_csv(file = "data/FAS_pups.csv",
+           na = c("","NA","."),
+           skip = 3)
+
+pups_df = janitor::clean_names(pups_df)
+
+# most people say <- is better  because it only does variable assignment whereas = is different if it's inside a function mean(x = ...) but tbh it doesn't really matter
+
+```
+
+
+## `select` some variables
+```{r}
+select(litters_df, group, litter_number)
+
+select(litters_df, group:gd_of_birth)
+
+select(litters_df, -group)
+
+select(litters_df, starts_with("gd"))
+
+select(litters_df, starts_with("gd"), group)
+
+select(litters_df, GROUP = group, everything())
+
+select(litters_df, -starts_with("gd"))
+```
+
+a couple of alternatives
+```{r}
+rename(litters_df, GROUP = group)
+
+relocate(litters_df, litter_number, gd0_weight) # move variables to the front
+```
+
+In the pups data select litter number, sex, and PD ears.
+```{r}
+select(pups_df, litter_number, sex, pd_ears)
+```
+
